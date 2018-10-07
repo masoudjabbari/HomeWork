@@ -1,7 +1,8 @@
 % %Q2
 % 
 tic
-p = [1.5; 1.5];
+p = [1; 1];
+% you had wrong prices here
 fVal = bertrand(p);
 iJac = inv(myJac('bertrand', p));     %define Jacbian matrix approximation
 %%
@@ -49,6 +50,8 @@ for iterq3 =1:maxitq3
     if norm(fValq3) < tolq3
         break
     else
+%         use vector notation like in homework. If you had 100 products,
+%         you would get tired writing the update.
         paq3new = paq3 - ( (paq3 - paq3old) ./ (f1Valq3 - f1q3old) ).* f1Valq3;
         pbq3new = pbq3 - ( (pbq3 - pbq3old) ./ (f2Valq3 - f2q3old) ).* f2Valq3;
         paq3old = paq3;
@@ -72,7 +75,7 @@ toc
 tic
 vq4=[2;2]
 g = @(pq4) [ (1+exp(vq4(1)-pq4(1))+exp(vq4(2)-pq4(2)))/(1+exp(vq4(2)-pq4(2)));(1+exp(vq4(1)-pq4(1))+exp(vq4(2)-pq4(2)))/(1+exp(vq4(1)-pq4(1)))];     %define the function as a vector based on p^(t+1)=1/1-D(p^t)
-:
+
 pq4 = [1.5;1.5];
 tolq4=1e-6;
 maxitq4 = 100;
