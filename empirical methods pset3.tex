@@ -1,0 +1,74 @@
+\documentclass{report}
+\renewcommand{\baselinestretch}{1.5} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{natbib}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\begin{Large}
+\begin{center}
+\Large{Masoud Jabbari \ \ \ \ \  Empirical Methods \ \ \ \ \ \ Set\#3}
+\end{center}
+\end{Large}
+
+Unfortunately the results are not good, for example the gradian is very high, but I could not find my errors in coding, so I report the results anyway. 
+I tried many initial points, but at the end I report the results for the initial guess %[7;-0.2;0.5;-1;0.3;-2]% which I selected the values to be close to the papers' results.
+
+
+Q1.
+
+For question one the results of the regression via Nelder-Mead method for maximum likelihood is as below:
+\begin{equation*}
+No\_affairs=10.92-0.489*Age+0.797*married\_years-0.739*religious+0.1262*occupation-1.407*self\_rate\_of\_marriage
+\end{equation*}
+
+With fminsearch method which is based on Nelder-Mead I find:
+\begin{equation*}
+No\_affairs=2.534-0.0323*Age+0.1157*married\_years-0.354*religious+0.0798*occupation-0.4094*self\_rate\_of\_marriage
+\end{equation*}
+
+
+
+Q2.
+
+For question two I tried all 3 quasi-Newton methods of steepest descent, DFP, and BFGS; but in all since the gradian was very larg, the code did not converge. I have left the steepest descent code commented in my MATLAB file.
+
+With fminunc which is based on BFGS, I find:
+
+
+With fminsearch method I find:
+\begin{equation*}
+No\_affairs=2.534-0.0323*Age+0.1157*married\_years-0.354*religious+0.0798*occupation-0.4094*self\_rate\_of\_marriage
+\end{equation*}
+where the results are same as fminsearch method for question 1.
+
+
+Q3. With lsqnonlin command for non-linear least squares, I find
+
+\begin{equation*}
+No\_affairs=7.02-0.2216*Age+0.4160*married\_years-0.8405*religious+0.1409*occupation-1.8248*self\_rate\_of\_marriage
+\end{equation*}
+
+
+Q4. 
+For question one the results of the regression via Nelder-Mead method for maximum likelihood is as below:
+\begin{equation*}
+No\_affairs=12.30-0.541*Age-0.1179*married\_years+0.0879*religious+0.1632*occupation-0.433*self\_rate\_of\_marriage
+\end{equation*}
+
+and via fminsearch I find:
+\begin{equation*}
+No\_affairs=2.51-0.0384*Age+0.1141*married\_years-0.2796*religious+0.0676*occupation-0.3698*self\_rate\_of\_marriage
+\end{equation*}
+
+
+Q5. In all estimations the sign og the coefficients are as expected and same as the paper. About the time, what I find is that Nelder is the fastest. Fminunc is the most robust one among all.
+
+
+
+
+
+
+
+\end{document}
