@@ -1,0 +1,88 @@
+\documentclass{report}
+\renewcommand{\baselinestretch}{1.5} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{natbib}
+\usepackage[margin=1in]{geometry}
+\begin{document}
+\begin{Large}
+\begin{center}
+\Large{Masoud Jabbari \ \ \ \ \  Empirical Methods \ \ \ \ \ \ Set\#4}
+\end{center}
+\end{Large}
+
+Q1.
+
+The algorithm for Quasi Monte Carlo approach for dart-throwing method is as follow: 
+
+1- Set a counter on 0
+
+2- Set number of grids (number elements in the sequence)
+
+3- Find griding points for x and y from a Quasi Monte Carlo method (an equi-distributed rule): for example Weyl rule 
+
+4- Set the number of throws
+
+5- Determine the gridded blocks which you determine as success blocks: for example a simple algorithm could be the blocks for which all x's and y's are in $x^2+y^2\leq 1$.  
+
+5- Drop the dart
+
+6- If the dart hitted in success blocks count 1: count=count+1
+
+else, do not count: count=count+0
+ 
+
+8- Repeat the loop for next throws until all throws are done: $(j=1:number of throws) $  
+
+9- Approximate $\pi$ as $\pi=\frac{count}{number of throws}$
+
+Approximation would be more accurate if we have larger number of elements in the sequence (finer grids)
+
+Q2.
+
+The algorithm for Newton-Cotes approach for dart-throwing method is as follow: (I am following Midpoint rule)
+
+1- Set a counter on 0
+
+2- Set the number of grids for x between 0 and 1
+
+3- Set the number of throws
+
+4- Find the values for y for x's that are at the mid of the grids that satisfies $x_mid^2+y^2=1$ and denote it as $y_mid^i$ where $i$ is the index for the grid.
+
+5- Drop the dart
+
+6- Find the x and y of the point the dart hitted and find $i$ such $x^{i}\leq x^{hit}\leq x^{i+1}$ that and find
+ $x_mid^{i}=\frac{x^{i}+x^{i+1}}{2}$
+ 
+7- If $y^{hit}<y_{mid}^{i}$, count 1: $count=count+1$,
+
+else,
+do not count: count=count+0
+
+8- Repeat the loop for next throws until all throws are done: $(j=1:number of throws) $  
+
+9- Approximate $\pi$ as $\pi=\frac{count}{number of throws}$
+
+Q3, 4, 5: The results for $\pi$ approximations and mean square errors and squared errors are summarized in the table:
+
+\begin{table}[]
+\caption{Mean and Standard Errors for $\pi$ Approximation}
+\label{my-label}
+\begin{tabular}{lllll}
+ & 100 & 1000  & 1000  &  \\
+ QMC& $3.1520(1.082 \times 10^{-4})$ & $3.1425(8.796\times 10^{-7})$ & $3.1416(1.1207\times10^{-9})$ &  \\
+ N-C& $3.1411 (2.1109 \times 10^{-7})$ & $3.1416 (2.1093\times 10^{-10})$ & $3.1416 (2.1091 \times 10^{-13})$  &  \\
+ PMC& $3.1391(0.0073)$ & $3.1396(7.9808\times 10^{-4})$  & $3.1417(6.9208\times 10^{-5})$ & 
+\end{tabular}
+\end{table}
+
+In the table QMC is quasi Monte Carlo method, N-C is Newton- Cotes and PMC is pseudo Monte Carlo from 100, 1000 and 10000 hits. For PSC the estimation reported is the mean of estimations from 200 simulations, the numbers in parenthesis are squared errors for QMC and N-C and mean squared errors for PMC. The table shows that NC is the most accurate estimation in terms of squared errors and QMC also does well compared to PSC. 
+
+
+
+
+
+
+\end{document}
