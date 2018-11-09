@@ -6,7 +6,7 @@ years_married=X(:,3);
 religiousness=X(:,4);
 occupation=X(:,5);
 selfrate=X(:,6);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 n=length(numaff);
 facy=(factorial(numaff));
 lnfacy=log(facy(:,1));
@@ -16,14 +16,14 @@ end
 tic
 %Likelihood=@(beta) -exp(X*beta)+yx*beta-lnfacy;
 Likelihood=@(beta)-sum(-exp(X*beta)+yx*beta-lnfacy);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %Q1 WITH FMINSEARCH
 
 beta0=[7;-0.2;0.5;-1;0.3;-2];
 %beta0=[0.5;0.5;0.5;0.5;0.5;0.5];
  betaq1fminsearch=fminsearch(Likelihood,beta0);
  toc
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %
 
 %  %    Q1 WITH NELDER MEAD
@@ -34,8 +34,9 @@ beta0=[7;-0.2;0.5;-1;0.3;-2];
 maxim_feval=100;
 Likelihood=@(beta)-sum(-exp(X*beta')+yx*beta'-lnfacy); 
 [betaq1nelder,minusmaxLikelihood,numoffuncs]=ANMS(Likelihood,beta0,toler,maxim_feval);
+% why is it so different? did it not ring any bells?
 toc
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Q2 WITH FMINUNC
 tic
 beta0=[7;-0.2;0.5;-1;0.3;-2];
@@ -43,7 +44,7 @@ beta0=[7;-0.2;0.5;-1;0.3;-2];
 Likelihood=@(beta)-sum(-exp(X*beta)+yx*beta-lnfacy);
 [betaq2,fval,exitflag,output,grad,hessian] = fminunc(Likelihood,beta0)
 toc
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Q2 WITH STEPPEST DESCENT
 % Likelihood=@(beta)-sum(-exp(X*beta)+yx*beta-lnfacy);
 % 
@@ -56,13 +57,15 @@ toc
 % end
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%
 %Q3
 tic
 sumresfun=@(beta)sum((y-exp(X*beta)).^2);
 [betaq3,resnorm,residual,exitflag,output,lambda,jacobian] = lsqnonlin(sumresfun,beta0);
+% again, this beta is very different. it should ring alarm in all your
+% systems. it cannot depend on the algorithm you use to back it out.
 toc
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  q4 WITH FMINSEARCH
 tic
 maxit=100;
@@ -72,7 +75,7 @@ beta0=[7;-0.2;0.5;-1;0.3;-2];
 sumres=@(beta)sum((y-exp(X*beta)).^2);
 betaq4fminsearch=fminsearch(sumres,beta0);
 toc
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Q4 WITH NELDER MEAD
 tic
 toler=1e-6;
