@@ -2,8 +2,9 @@ N1=100;
 N2=1000;
 N3=10000;
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%Q3
+% divide into sections, it is done by two percent signs
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%Q3
+% this does not run on my computer, you forgot to add seQMC100
 x_100=qnwequi(N1,0,1,'N');
 y_100=sqrt(1-x_100.^2);
 pi3_100=4*sum(y_100)/N1;
@@ -22,7 +23,7 @@ y_10000=sqrt(1-x_10000.^2);
 pi3_10000=4*sum(y_10000)/N3;
 seQMC10000=(pi3_10000-pi)^2;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%Q4
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%Q4
 pi4_100=Newton_Cotes(@(x) 4*sqrt(1-x.^2),0,1,N1);
 pi4_1000=Newton_Cotes(@(x) 4*sqrt(1-x.^2),0,1,N2);
 pi4_10000=Newton_Cotes(@(x) 4*sqrt(1-x.^2),0,1,N3);
@@ -30,7 +31,7 @@ seNC100=(pi4_100-pi)^2;
 seNC1000=(pi4_1000-pi)^2;
 seNC10000=(pi4_10000-pi)^2;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%Q5
+%% %%%%%%%%%%%%%%%%%%%%%%%%%Q5
 num_sim=200;
 seed=1234567890;
 rng(seed);
